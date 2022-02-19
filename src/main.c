@@ -6,7 +6,9 @@
         system("read b");
     }
 #elif defined WIN32
-    #include <conio.h>
+    void getch(void) {
+        system("@pause>nul");
+    }
 #else
     void getch(void) {
         system("read b");
