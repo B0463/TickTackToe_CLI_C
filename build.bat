@@ -1,0 +1,1 @@
+gcc "src\main.c" -o "bin\tick tack toe.exe"
