@@ -1,36 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#ifdef LINUX
-    void getch(void) {
-        system("read b");
-    }
-#elif defined WIN32
-    void getch(void) {
-        system("@pause>nul");
-    }
-#else
-    void getch(void) {
-        system("read b");
-    }
-#endif
-
-char map[3][3] = {
-    '-', '-', '-',
-    '-', '-', '-',
-    '-', '-', '-'
-};
-
-void show_map(void);
-void user_move(void);
-int pc_move(void);
-char check_part(void);
-int check_loc(int lcx, int lcy);
-void console_clear(void);
+#include "prepros.h"
 
 void main(void) {
     console_clear();
-    printf("\n");
+    printf("/n");
     for(;;) {
         user_move();
         console_clear();
@@ -49,16 +21,6 @@ void main(void) {
             exit(0);
         }
     }
-}
-
-void console_clear(void) {
-    #ifdef LINUX
-        system("clear");
-    #elif defined WIN32
-        system ("cls");
-    #else
-        system("clear");
-    #endif
 }
 
 char check_part(void) {
@@ -81,7 +43,7 @@ char check_part(void) {
     else return '0';
 }
 
-int check_loc(int lcx, int lcy) {
+int check_locale(int lcx, int lcy) {
     if(map[lcx][lcy]=='-') {
         return 1;
     } else {
@@ -101,7 +63,7 @@ void user_move(void) {
         scanf("%d", &usy);
         usy--;
         usx--;
-        if(check_loc(usx, usy)) {
+        if(check_locale(usx, usy)) {
             map[usx][usy] = 'x';
             printf("\nPC time\n");
             break;
@@ -126,7 +88,7 @@ int pc_move(void) {
     for(;;) {
         pcx=rand()%3;
         pcy=rand()%3;
-        if(check_loc(pcx, pcy)) {
+        if(check_locale(pcx, pcy)) {
             map[pcx][pcy]='o';
             break;
         }
